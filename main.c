@@ -10,7 +10,7 @@ void move_files(char* dst_path) {
     DIR* dp=opendir(curr_path);
     struct dirent* directory;
     while((directory=readdir(dp))!=NULL) {
-        if(strcmp(directory->d_name, ".")!=0 && strcmp(directory->d_name, "..")!=0) {
+        if(strcmp(directory->d_name, ".")!=0 && strcmp(directory->d_name, "..")!=0 && strcmp(directory->d_name, ".DS_Store")!=0) {
             struct stat file;
             if(stat(directory->d_name, &file)!=0) {
                 perror("stat");
@@ -28,6 +28,7 @@ void move_files(char* dst_path) {
                     mkdir(new_dirpath, file.st_mode & 0b0000111111111111);
                     move_files(new_dirpath);
                     chdir("..");
+                    rmdir(directory->d_name);
                 }
             }
             else {
@@ -43,6 +44,7 @@ void move_files(char* dst_path) {
                 }
                 fclose(fdata);
                 fclose(newfile);
+                remove(directory->d_name);
             }
         }
     }
