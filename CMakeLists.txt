@@ -3,4 +3,4 @@ project(FileMover C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(FileMover main.c)
+add_executable(FileMover fmove.c)

@@ -5,10 +5,10 @@ CFLAGS = -c -Wall
 all: fmove clean
 
 fmove: main.o
-	$(CC) main.o -o fmove
+	$(CC) fmove.o -o fmove
 
-main.o: main.c
-	$(CC) main.c $(CFLAGS)
+main.o: fmove.c
+	$(CC) fmove.c $(CFLAGS)
 
 clean:
 	rm *.o
